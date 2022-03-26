@@ -1,15 +1,25 @@
 import React from 'react'
+import { useState } from 'react';
 import "./Item.css"
 
 
-const Item = ({card}) => {
+const Item = ({ card }) => {
+  const [showLogo , setshowLogo] = useState(true);
+
   return (
-    <div className='card'>
-        <img className='card-logo' src={card.img} alt="" />
+    <div className='card' onClick={() => setshowLogo(!showLogo)}>
+      {showLogo ? ( 
+      <div>
+        <img className='card-logo' src={card.img} alt="logo" />
         <h3 className='card-title'>{card.name}</h3>
-        {
-            console.log(card)
-        }
+      </div>
+      ) : (
+      <ul className='list'>
+        {card.options.map((element,index) => {
+            return <li key={index}>{element} </li>
+          })}
+      </ul>
+      )}
     </div>
   )
 }
